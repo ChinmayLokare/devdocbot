@@ -108,6 +108,18 @@ curl -X POST /webhooks/github \
 ```
 
 
+## 📊 Performance Metrics (Real-World Test)
+
+| Metric | Value              |
+|--------|--------------------|
+| **P50 Latency** | 588 ms             |
+| **P95 Latency** | 741 ms             |
+| **Indexing Speed**| ~2 seconds per doc |
+| **Monthly Cost** | $0.00              |
+
+### Load Test Results
+![Load Test](docs/screenshots/devdoc_test_results.png)
+
 ## Infrastructure as Code (IaC)
 
 This project currently uses a hybrid deployment strategy:
