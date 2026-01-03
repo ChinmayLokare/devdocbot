@@ -71,6 +71,11 @@ def lambda_handler(event, context):
 
         return {
             'statusCode': 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'OPTIONS,POST'
+            },
             'body': json.dumps({
                 'message': f'{queued_count} documents queued for indexing',
                 'doc_ids': [doc_id]  # Just returning last one for simplicity

@@ -62,7 +62,15 @@ def lambda_handler(event, context):
 
         log_structured('search_started', {'query': query})
 
-        if not query: return {'statusCode': 400, 'body': 'Query required'}
+        if not query: 
+            return {
+                'statusCode': 400, 
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                'body': 'Query required'
+            }
 
         # 2. Check Cache
         query_hash = get_query_hash(query)
@@ -139,7 +147,12 @@ def lambda_handler(event, context):
 
         return {
             'statusCode': 200,
-            'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'OPTIONS,POST',
+                'Access-Control-Allow-Headers': 'Content-Type,Authorization'
+            },
             'body': json.dumps({'query': query, 'results': results}, cls=DecimalEncoder)
         }
 
