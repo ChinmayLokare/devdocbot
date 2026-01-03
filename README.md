@@ -24,7 +24,7 @@ The system follows a **Serverless Event-Driven Architecture** to ensure zero idl
 3.  **AI/ML:** Hugging Face `all-MiniLM-L6-v2` (via BAAI) for embeddings.
 4.  **Database:** Pinecone (Vectors) + DynamoDB (Metadata & Caching).
 
-*(See [docs/architecture.md](docs/architecture.md) for detailed diagrams)*
+*(See [docs/architecture.md](./docs/architecture.md) for detailed diagrams)*
 
 ---
 
@@ -54,7 +54,7 @@ The system follows a **Serverless Event-Driven Architecture** to ensure zero idl
 
 ## 🔌 API Usage
 
-**Base URL:** `[YOUR_API_GATEWAY_URL]`
+**Base URL:** `https://9xlucsfpd9.execute-api.us-east-2.amazonaws.com/dev/`
 
 ### 1. Search
 ```bash
