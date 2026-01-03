@@ -1,0 +1,36 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.env
+# Virtual Environments (Added yours)
+env/
+venv/
+doc-env/
+
+# --- AWS & Lambda ---
+*.zip
+.aws-sam/
+cdk.out/
+
+# --- Terraform ---
+.terraform/
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+crash.log
+*.tfvars
+secrets.tfvars
+
+# --- IDE & OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Secrets & Notes (CRITICAL) ---
+notes
+*.pem
+*.key

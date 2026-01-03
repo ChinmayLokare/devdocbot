@@ -1,0 +1,135 @@
+openapi: 3.0.0
+info:
+  title: DevDocBot API
+  description: Semantic documentation search API
+  version: 1.0.0
+  contact:
+    name: Chinmay
+    email: chinmaylokare9@example.com
+
+servers:
+  - url: https://9xlucsfpd9.execute-api.us-east-2.amazonaws.com/dev
+    description: Development server
+
+paths:
+  /search:
+    post:
+      summary: Search documentation
+      description: Performs semantic search across indexed documentation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: Natural language search query
+                  example: "how to deploy kubernetes pods"
+                top_k:
+                  type: integer
+                  description: Number of results to return
+                  default: 5
+                  minimum: 1
+                  maximum: 20
+                filter:
+                  type: object
+                  description: Optional metadata filters
+                  properties:
+                    source:
+                      type: string
+                      example: "github"
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query:
+                    type: string
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        text:
+                          type: string
+                        score:
+                          type: number
+                          format: float
+                        metadata:
+                          type: object
+                  count:
+                    type: integer
+                  cache_hit:
+                    type: boolean
+                  execution_time_ms:
+                    type: integer
+        '400':
+          description: Invalid request
+        '500':
+          description: Server error
+
+  /documents:
+    post:
+      summary: Upload documents
+      description: Queue documents for indexing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - documents
+              properties:
+                documents:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - title
+                      - text
+                    properties:
+                      title:
+                        type: string
+                      text:
+                        type: string
+                      source:
+                        type: string
+                        default: "manual"
+                      url:
+                        type: string
+      responses:
+        '200':
+          description: Documents queued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  queued:
+                    type: integer
+
+  /webhooks/github:
+    post:
+      summary: GitHub webhook receiver
+      description: Receives GitHub push events for automatic indexing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Webhook processed
