@@ -13,6 +13,28 @@
 *Example: Searching for "how to scale" will find documents about "Horizontal Pod Autoscaler" even if the word "scale" isn't present.*
 
 ---
+## 🌐 Live Demo
+- Frontend: https://devdocbot.netlify.app
+- API Endpoint: https://9xlucsfpd9.execute-api.us-east-1.amazonaws.com/dev
+Try searching for:
+- "kubernetes deployment"
+- "docker best practices"
+- "AWS lambda functions"
+
+
+---
+
+### 🎨 Interface
+
+The system features a React-based frontend for Searching and Indexing new content.
+1. Semantic Search
+![alt text](docs/screenshots/frontend-demo.png)
+
+Results are ranked by semantic similarity score (>80% = Excellent Match).
+2. Document Indexing
+Users can manually upload documentation via the UI, or let the GitHub Webhook auto-index changes from connected repositories.
+
+---
 
 ## 🏗️ Architecture
 
@@ -35,6 +57,20 @@ The system follows a **Serverless Event-Driven Architecture** to ensure zero idl
 -   🔄 **Auto-Sync:** Listens to GitHub `push` events to re-index documentation in real-time.
 -   🛡️ **Resilience:** Uses Dead Letter Queues (DLQ) and SQS retries for fault tolerance.
 -   📊 **Observability:** Custom CloudWatch Dashboard tracking Hit Rate, Latency, and Indexing Throughput.
+
+---
+
+## 📊 Performance Metrics (Real-World Test)
+
+| Metric | Value              |
+|--------|--------------------|
+| **P50 Latency** | 588 ms             |
+| **P95 Latency** | 741 ms             |
+| **Indexing Speed**| ~2 seconds per doc |
+| **Monthly Cost** | $0.00              |
+
+### Load Test Results
+![Load Test](docs/screenshots/devdoc_test_results.png)
 
 ---
 
@@ -108,21 +144,18 @@ curl -X POST /webhooks/github \
 ```
 
 
-## 📊 Performance Metrics (Real-World Test)
 
-| Metric | Value              |
-|--------|--------------------|
-| **P50 Latency** | 588 ms             |
-| **P95 Latency** | 741 ms             |
-| **Indexing Speed**| ~2 seconds per doc |
-| **Monthly Cost** | $0.00              |
 
-### Load Test Results
-![Load Test](docs/screenshots/devdoc_test_results.png)
+## Deployment
 
-## Infrastructure as Code (IaC)
+**Option 1: Manual(Current)**
 
-This project currently uses a hybrid deployment strategy:
+This project was deployed using the AWS Console to demonstrate understanding of core services.
+
+**Option 2: Terraform (Hybrid)**
+
+A modular Terraform configuration is included in /infra to demonstrate IaC capabilities.
+This project also uses a hybrid deployment strategy:
 1.  **Core Services:** Deployed via AWS Console for rapid prototyping.
 2.  **IaC Demo:** A Terraform configuration is included in `/infra` to demonstrate how the stack would be provisioned in an enterprise environment.
 
