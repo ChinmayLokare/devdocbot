@@ -111,7 +111,7 @@ function App() {
         <p>
           Built with React, AWS Lambda, Pinecone, and Hugging Face •
           <a
-            href="https://github.com/yourusername/devdocbot"
+            href="https://github.com/ChinmayLokare/devdocbot"
             target="_blank"
             rel="noopener noreferrer"
           >
