@@ -61,8 +61,51 @@ The system follows a **Serverless Event-Driven Architecture** to ensure zero idl
 curl -X POST /search \
   -H "Content-Type: application/json" \
   -d '{"query": "deploy to kubernetes", "top_k": 3}'
+```
+
+### 2. Manual Document Upload
+To index a local text file or manual content:
+
+```bash
+curl -X POST /documents \
+  -H "Content-Type: application/json" \
+  -d '{
+    "documents": [
+      {
+        "title": "K8s Pods Guide",
+        "text": "A Pod is the smallest execution unit in Kubernetes.",
+        "source": "manual",
+        "url": "https://kubernetes.io/docs/concepts/workloads/pods/"
+      }
+    ]
+  }'
+  
+```
+
+### 3. GitHub Auto-Indexing
+The system listens for push events via Webhook. You can trigger it manually for testing:
 
 
+
+
+```bash
+curl -X POST /webhooks/github \
+  -H "Content-Type: application/json" \
+  -H "X-GitHub-Event: push" \
+  -d '{
+    "repository": {
+      "full_name": "ChinmayLokare/devdocbot-test-docs",
+      "html_url": "https://github.com/ChinmayLokare/devdocbot-test-docs.git"
+    },
+    "ref": "refs/heads/main",
+    "commits": [
+      {
+        "added": ["README.md"],
+        "modified": []
+      }
+    ]
+  }'
+```
 
 
 ## Infrastructure as Code (IaC)
