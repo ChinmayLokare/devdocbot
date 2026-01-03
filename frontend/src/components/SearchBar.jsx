@@ -12,14 +12,14 @@ function SearchBar({ onSearch, isLoading }) {
     };
 
     const exampleQueries = [
-        "kubernetes deployment",
-        "docker containers",
-        "AWS lambda functions",
+        "troubleshoot crashloopbackoff",
+        "python logging standards",
         "python best practices",
         "Who works on the checkout API?",
         "How do I fetch a product by id?",
-        "troubleshoot crashloopbackoff",
-        "python logging standards"
+        "AWS lambda functions"
+
+
     ];
 
     return (
