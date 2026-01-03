@@ -170,3 +170,14 @@ To run the IaC demo:
 cd infra
 terraform init
 terraform apply
+```
+---
+## 👤 Author
+
+Chinmay Lokare
+
+[LinkedIn](https://www.linkedin.com/in/chinmaylokare/)
+
+[GitHub](https://github.com/ChinmayLokare)
+
+Built as a 12-Day Cloud Engineering Challenge.
